@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using PatientManager;
+
 
 namespace ClinicAPI
 {
@@ -35,6 +35,7 @@ namespace ClinicAPI
         {
             // Configuración para Swagger
             var appName = Configuration.GetSection("AppSettings:AppName").Value;
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
